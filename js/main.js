@@ -121,7 +121,9 @@ $(document).ready(function(){
         backgroundColor: '#fefefe',
         height: 500,
         legend: {position: 'bottom', textStyle: {fontSize: 20}},
-        titleTextStyle: {fontSize: 20}
+        titleTextStyle: {fontSize: 20},
+        pieSliceTextStyle: {color: 'black', fontSize: 20},
+        slices: {0: {color: '#329832'}, 1: {color: '#ffff4c'}, 2: {color: '#de8732'}, 3: {color: '#c13232'}}
       };
 
       var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -166,7 +168,7 @@ var ajaxRequest = function (currentLine){$.ajax({
   complete: function(xhr, textStatus) {
     var apiStatus = xhr.status;
     var id = currentLine.data('id');
-    if (apiStatus >= 200 && apiStatus < 300) {
+    if (apiStatus >= 200 && apiStatus <= 299) {
       $(currentLine).addClass('green');
       var countType = '/count200';
       var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
@@ -175,8 +177,8 @@ var ajaxRequest = function (currentLine){$.ajax({
           return statusCount+1;
         });
       }, 500);
-    } else if (apiStatus >= 300 && apiStatus < 400) {
-      $(currentLine).addClass('orange');
+    } else if (apiStatus >= 300 && apiStatus <= 399) {
+      $(currentLine).addClass('yellow');
       var countType = '/count300';
       var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
       setTimeout(function() {
@@ -184,8 +186,8 @@ var ajaxRequest = function (currentLine){$.ajax({
           return statusCount+1;
         });
       }, 500);
-    } else if (apiStatus >= 400 && apiStatus < 500) {
-      $(currentLine).addClass('red');
+    } else if (apiStatus >= 400 && apiStatus < 499) {
+      $(currentLine).addClass('orange');
       var countType = '/count400';
       var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
       setTimeout(function() {
@@ -193,7 +195,7 @@ var ajaxRequest = function (currentLine){$.ajax({
           return statusCount+1;
         });
       }, 500);
-    } else if (apiStatus >= 500 && apiStatus < 600) {
+    } else if (apiStatus >= 500 && apiStatus < 599) {
       $(currentLine).addClass('red');
       var countType = '/count500';
       var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);

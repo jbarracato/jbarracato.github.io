@@ -28,15 +28,19 @@ body {
     color: #FFFAFA;
 }
 .green {
-  background: #007f00;
+  background: #329832;
 }
 
 .red {
-  background: #b20000;
+  background: #c13232;
 }
 
 .orange {
-  background: #d66a00;
+  background: #de8732;
+}
+
+.yellow {
+  background: #ffff4c;
 }
 
 .run, .edit, .delete, .history {
@@ -51,7 +55,7 @@ body {
   text-align: center;
 }
 
-.green > .run, .green > .edit, .green > .delete, .orange > .run, .orange > .edit, .orange > .delete, .red > .run, .red > .edit, .red > .delete, .green > .history, .orange > .history, .red > .history {
+.green > .run, .green > .edit, .green > .delete, .orange > .run, .orange > .edit, .orange > .delete, .red > .run, .red > .edit, .red > .delete, .green > .history, .orange > .history, .red > .history, .yellow > .run, .yellow > .edit, .yellow > .delete, .yellow > .history {
   background: #000000;
 }
 
@@ -74,6 +78,10 @@ li:nth-child(even).red {
 
 li:nth-child(even).orange {
   background: #de8732;
+}
+
+li:nth-child(even).yellow {
+  background: #ffff4c;
 }
 
 .run:hover, .edit:hover, .delete:hover, .history:hover {
