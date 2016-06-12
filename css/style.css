@@ -1,0 +1,205 @@
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+  color: #4c4c4c;
+  font-size: 25px;
+  line-height: 1.4;
+  font-family: 'Roboto', sans-serif;
+  background: #EEEEEE;
+}
+
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+
+/* Center the container */
+#container {
+	width: 300px;
+	margin: 1% auto 1% auto;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+.green, .red, .orange {
+    color: #FFFAFA;
+}
+.green {
+  background: #007f00;
+}
+
+.red {
+  background: #b20000;
+}
+
+.orange {
+  background: #d66a00;
+}
+
+.run, .edit, .delete, .history {
+  padding: 8px;
+  margin-left: 15px;
+  margin-top: 10px;
+  background: #4c4c4c;
+  color: #FFFAFA;
+  border-radius: 12px;
+  border: 0;
+  width: 35px;
+  text-align: center;
+}
+
+.green > .run, .green > .edit, .green > .delete, .orange > .run, .orange > .edit, .orange > .delete, .red > .run, .red > .edit, .red > .delete, .green > .history, .orange > .history, .red > .history {
+  background: #000000;
+}
+
+li {
+  list-style: none;
+  padding: 10px;
+}
+
+li:nth-child(even) {
+  background: #e5e1e1;
+}
+
+li:nth-child(even).green {
+  background: #329832;
+}
+
+li:nth-child(even).red {
+  background: #c13232;
+}
+
+li:nth-child(even).orange {
+  background: #de8732;
+}
+
+.run:hover, .edit:hover, .delete:hover, .history:hover {
+  cursor: pointer;
+}
+
+.displayName {
+  display: block;
+  text-align: center;
+}
+
+#header {
+  background: #191919;
+  color: #EEEEEE;
+  text-align: center;
+  height: 45px;
+  padding-top: 5px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+#footer {
+  background: #191919;
+  height: 35px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#add {
+  font-size: 25px;
+  text-align: right;
+  margin-right: 10px;
+  color: #EEEEEE;
+}
+
+/******************************************
+/* Modal Styles
+/*******************************************/
+
+/* The Modal (background) */
+.modal, #piechartContainer {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content, #piechart {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 200px;
+}
+
+#cancel:hover, #submit {
+    cursor: pointer;
+}
+
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}
+
+#cancel, #submit {
+  width: 50%;
+}
+
+#cancel, #submit, #modalHeader {
+  display: block;
+  text-align: center;
+  color: #EEEEEE;
+  height: 50px;
+  padding-top: 8px;
+  margin-top: 15px;
+}
+
+#cancel {
+  background: #4c4c4c;
+  float: left;
+}
+
+#submit {
+  background: #329832;
+  float: right;
+}
+
+#modalHeader {
+  background: #191919;
+  color: #EEEEEE;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+input {
+  font-size: 20px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 90%;
+  margin-left: 5%;
+}
+
+/******************************************
+/* Pie Chart Styles
+/*******************************************/
+
+#piechartContainer {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+#piechart {
+    background-color: #fefefe;
+    margin: 10% auto; /* 15% from the top and centered */
+    height: 400px;
+    width: 400px;
+}

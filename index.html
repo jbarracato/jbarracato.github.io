@@ -1,6 +1,57 @@
+<!DOCTYPE html>
 <html>
-<head></head>
-<body>
-<a href="goals.html"><img src="http://i.imgur.com/dosK05U.gif" /></a> <br>
-<a href="worries.html"><img src="http://i.imgur.com/2s0HwpM.gif" /></a> </body>
+
+  <head>
+    <title></title>
+
+    <!-- external CSS link -->
+    <link rel='stylesheet' href='css/reset.css'>
+    <link rel='stylesheet' href='css/style.css'>
+
+    <!--*** Google Web Fonts ***-->
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- font awesome -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+  </head>
+
+  <body>
+
+    <div id='container'>
+      <div id='header'><h1>API Pulse Check</h1></div>
+      <div id='apiList'></div>
+      <div id='footer'><p id='add'>+</p></div>
+
+
+    </div> <!--container div-->
+
+    <div id='modal'>
+      <!-- The Modal -->
+      <div id='myModal' class='modal none'>
+        <!-- Modal content -->
+        <div class='modal-content'>
+          <div id='modalHeader'>ADD A NEW URL</div>
+          <input name='newApiName' type='text' id='addApiName' placeholder='Name' />
+          <input name='newApiUrl' type='text' id='addApiUrl' placeholder='URL'/>
+          <br />
+          <div id='cancel'>CANCEL</div>
+          <div id='submit'>SUBMIT</div>
+        </div>
+      </div>
+    </div> <!--modal div-->
+
+    <!-- pie chart -->
+    <div id='piechartContainer' class='none'>
+      <div id='piechart'></div>
+    </div>
+
+    <!--*** External JS ***-->
+    <!-- Firebase CDN -->
+    <script src='https://cdn.firebase.com/js/client/2.4.1/firebase.js'></script>
+    <!-- pie chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
+    <script src='js/main.js' type='text/javascript' charset='utf-8' async defer></script>
+  </body>
+
 </html>
