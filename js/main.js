@@ -56,6 +56,10 @@ $(document).ready(function(){
     getHistory(id);
   });
 
+  setTimeout(function() {
+    $('#apiList').addClass('expand');
+  }, 1000);
+
 //close document.ready function on next line
 });
 

@@ -8,9 +8,17 @@
   color: #EEEEEE;
 }
 
+#apiList {
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height 2s;
+  -moz-transition: height 2s;
+  transition: height 2s;
+}
+
 #container {
-	width: 300px;
-	margin: 1% auto 1% auto;
+	width: 600px;
+	margin: 1.5% auto 1% auto;
 }
 
 #footer {
@@ -30,6 +38,11 @@
   border-top-left-radius: 12px;
 }
 
+.expand {
+  height: 675px !important;
+  overflow: scroll !important;
+}
+
 body {
   color: #4c4c4c;
   font-size: 25px;
@@ -46,7 +59,11 @@ body {
 }
 
 .block {
-  display: block;
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 500ms ease-in;
+  -moz-transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in;
 }
 
 .modal, #piechartContainer {
@@ -62,7 +79,9 @@ body {
 }
 
 .none {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 500ms, opacity 500ms linear;
 }
 
 /******************************************
@@ -71,6 +90,7 @@ body {
 .displayName {
   display: block;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .green > .run, .green > .edit, .green > .delete, .orange > .run, .orange > .edit, .orange > .delete, .red > .run, .red > .edit, .red > .delete, .green > .history, .orange > .history, .red > .history, .yellow > .run, .yellow > .edit, .yellow > .delete, .yellow > .history {
@@ -99,8 +119,8 @@ body {
 }
 
 .run, .edit, .delete, .history {
-  padding: 8px;
-  margin-left: 15px;
+  padding: 8px 35px 8px 35px;
+  margin-left: 32px;
   margin-top: 10px;
   background: #4c4c4c;
   color: #FFFAFA;
