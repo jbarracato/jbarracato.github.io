@@ -56,6 +56,7 @@ body {
 /*******************************************/
 .run:hover, .edit:hover, .delete:hover, .history:hover, #cancel:hover, #submit {
   cursor: pointer;
+  background: #4C4C4C;
 }
 
 .block {
@@ -93,36 +94,30 @@ body {
   margin-bottom: 10px;
 }
 
-.green > .run, .green > .edit, .green > .delete, .orange > .run, .orange > .edit, .orange > .delete, .red > .run, .red > .edit, .red > .delete, .green > .history, .orange > .history, .red > .history, .yellow > .run, .yellow > .edit, .yellow > .delete, .yellow > .history {
-  background: #000000;
-}
-
-/* Purposely Excluding .yellow on the following line
-    because it is hard to read white on yellow */
-.green, .red, .orange {
+.green, .red, .orange, .yellow, .teapot {
     color: #FFFAFA;
 }
-.green {
+.green, li:nth-child(even).green {
   background: #329832;
 }
 
-.red {
+.red, li:nth-child(even).red {
   background: #c13232;
 }
 
-.orange {
+.orange, li:nth-child(even).orange {
   background: #de8732;
 }
 
-.yellow {
-  background: #ffff4c;
+.yellow, li:nth-child(even).yellow {
+  background: #cccc3c;
 }
 
 .run, .edit, .delete, .history {
   padding: 8px 35px 8px 35px;
   margin-left: 32px;
   margin-top: 10px;
-  background: #4c4c4c;
+  background: #9a9a9a;
   color: #FFFAFA;
   border-radius: 12px;
   border: 0;
@@ -139,22 +134,34 @@ li:nth-child(even) {
   background: #e5e1e1;
 }
 
-li:nth-child(even).green {
-  background: #329832;
+/*** 418 Easter Egg ***/
+.teapot {
+  -webkit-animation: color_change 500ms infinite alternate;
+  -moz-animation: color_change 500ms infinite alternate;
+  -ms-animation: color_change 500ms infinite alternate;
+  animation: color_change 500ms infinite alternate;
 }
 
-li:nth-child(even).red {
-  background: #c13232;
+@-webkit-keyframes color_change {
+  from { background-color: blue; }
+  to { background-color: red; }
 }
-
-li:nth-child(even).orange {
-  background: #de8732;
+@-moz-keyframes color_change {
+  from { background-color: blue; }
+  to { background-color: red; }
 }
-
-li:nth-child(even).yellow {
-  background: #ffff4c;
+@-ms-keyframes color_change {
+  from { background-color: blue; }
+  to { background-color: red; }
 }
-
+@-o-keyframes color_change {
+  from { background-color: blue; }
+  to { background-color: red; }
+}
+@keyframes color_change {
+  from { background-color: blue; }
+  to { background-color: red; }
+}
 /******************************************
 /* MODAL-ONLY STYLES
 /*******************************************/

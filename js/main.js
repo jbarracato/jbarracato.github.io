@@ -138,7 +138,7 @@ function getHistory(id) {
       legend: {position: 'bottom', textStyle: {fontSize: 20}},
       titleTextStyle: {fontSize: 20},
       pieSliceTextStyle: {color: 'black', fontSize: 20},
-      slices: {0: {color: '#329832'}, 1: {color: '#ffff4c'}, 2: {color: '#de8732'}, 3: {color: '#c13232'}}
+      slices: {0: {color: '#329832'}, 1: {color: '#cccc3c'}, 2: {color: '#de8732'}, 3: {color: '#c13232'}}
     };
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
     chart.draw(data, options);
@@ -182,7 +182,13 @@ var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
     var urlRef;
     var apiStatus = xhr.status;
     var id = currentLine.data('id');
-    if (apiStatus >= 200 && apiStatus <= 299) {
+
+    if (apiStatus == 418) {
+      $(currentLine).addClass('teapot');
+      setTimeout(function() {
+        $(currentLine).removeClass('teapot');
+      }, 2500);
+    } else if (apiStatus >= 200 && apiStatus <= 299) {
       $(currentLine).addClass('green');
       countType = '/count200';
       urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
