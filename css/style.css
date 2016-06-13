@@ -1,6 +1,34 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
+#add {
+  font-size: 25px;
+  text-align: right;
+  margin-right: 10px;
+  color: #EEEEEE;
+}
+
+#container {
+	width: 300px;
+	margin: 1% auto 1% auto;
+}
+
+#footer {
+  background: #191919;
+  height: 35px;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+#header {
+  background: #191919;
+  color: #EEEEEE;
+  text-align: center;
+  height: 45px;
+  padding-top: 5px;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+}
 
 body {
   color: #4c4c4c;
@@ -10,20 +38,47 @@ body {
   background: #EEEEEE;
 }
 
-
 /******************************************
-/* LAYOUT
+/* COMMON STYLES
 /*******************************************/
+.run:hover, .edit:hover, .delete:hover, .history:hover, #cancel:hover, #submit {
+  cursor: pointer;
+}
 
-/* Center the container */
-#container {
-	width: 300px;
-	margin: 1% auto 1% auto;
+.block {
+  display: block;
+}
+
+.modal, #piechartContainer {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+.none {
+  display: none;
 }
 
 /******************************************
-/* ADDITIONAL STYLES
+/* URL LIST STYLES
 /*******************************************/
+.displayName {
+  display: block;
+  text-align: center;
+}
+
+.green > .run, .green > .edit, .green > .delete, .orange > .run, .orange > .edit, .orange > .delete, .red > .run, .red > .edit, .red > .delete, .green > .history, .orange > .history, .red > .history, .yellow > .run, .yellow > .edit, .yellow > .delete, .yellow > .history {
+  background: #000000;
+}
+
+/* Purposely Excluding .yellow on the following line
+    because it is hard to read white on yellow */
 .green, .red, .orange {
     color: #FFFAFA;
 }
@@ -55,10 +110,6 @@ body {
   text-align: center;
 }
 
-.green > .run, .green > .edit, .green > .delete, .orange > .run, .orange > .edit, .orange > .delete, .red > .run, .red > .edit, .red > .delete, .green > .history, .orange > .history, .red > .history, .yellow > .run, .yellow > .edit, .yellow > .delete, .yellow > .history {
-  background: #000000;
-}
-
 li {
   list-style: none;
   padding: 10px;
@@ -84,80 +135,9 @@ li:nth-child(even).yellow {
   background: #ffff4c;
 }
 
-.run:hover, .edit:hover, .delete:hover, .history:hover {
-  cursor: pointer;
-}
-
-.displayName {
-  display: block;
-  text-align: center;
-}
-
-#header {
-  background: #191919;
-  color: #EEEEEE;
-  text-align: center;
-  height: 45px;
-  padding-top: 5px;
-  border-top-right-radius: 12px;
-  border-top-left-radius: 12px;
-}
-
-#footer {
-  background: #191919;
-  height: 35px;
-  border-bottom-right-radius: 12px;
-  border-bottom-left-radius: 12px;
-}
-
-#add {
-  font-size: 25px;
-  text-align: right;
-  margin-right: 10px;
-  color: #EEEEEE;
-}
-
 /******************************************
-/* Modal Styles
+/* MODAL-ONLY STYLES
 /*******************************************/
-
-/* The Modal (background) */
-.modal, #piechartContainer {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content, #piechart {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    width: 40%; /* Could be more or less, depending on screen size */
-    height: 200px;
-}
-
-#cancel:hover, #submit {
-    cursor: pointer;
-}
-
-.block {
-  display: block;
-}
-
-.none {
-  display: none;
-}
-
-#cancel, #submit {
-  width: 50%;
-}
-
 #cancel, #submit, #modalHeader {
   display: block;
   text-align: center;
@@ -167,14 +147,13 @@ li:nth-child(even).yellow {
   margin-top: 15px;
 }
 
+#cancel, #submit {
+  width: 50%;
+}
+
 #cancel {
   background: #4c4c4c;
   float: left;
-}
-
-#submit {
-  background: #329832;
-  float: right;
 }
 
 #modalHeader {
@@ -182,6 +161,18 @@ li:nth-child(even).yellow {
   color: #EEEEEE;
   font-weight: bold;
   margin-bottom: 15px;
+}
+
+#submit {
+  background: #329832;
+  float: right;
+}
+
+.modal-content, #piechart {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 200px;
 }
 
 input {
@@ -193,7 +184,7 @@ input {
 }
 
 /******************************************
-/* Pie Chart Styles
+/* PIECHART-ONLY STYLES
 /*******************************************/
 
 #piechartContainer {
