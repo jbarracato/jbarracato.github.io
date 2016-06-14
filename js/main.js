@@ -23,26 +23,39 @@ $(document).ready(function(){
 
   //Add new URL to Firebase
   $('#submit').on('click', function (event) {
-    var required = 'false';
-    if (checkbox.checked) {
-      required = 'true';
-    }
     var apiName = $('#addApiName').val();
     var apiUrl = $('#addApiUrl').val();
-    $('#addApiName').val('');
-    $('#addApiUrl').val('');
-    var apiRef = apiAppRef.child('savedApis');
-    apiRef.push({
-      name: apiName,
-      url: apiUrl,
-      required: required,
-      count200: 0,
-      count300: 0,
-      count400: 0,
-      count500: 0,
-    });
-    //Close modal when clicking cancel
-    $('#cancel').click();
+    if ((apiName.length === 0) && (apiUrl.length === 0)) {
+      $('#addApiName').addClass('redBorder');
+      $('#addApiUrl').addClass('redBorder');
+    } else if (apiName.length === 0) {
+      $('#addApiName').addClass('redBorder');
+      $('#addApiUrl').removeClass('redBorder');
+    } else if (apiUrl.length === 0) {
+      $('#addApiUrl').addClass('redBorder');
+      $('#addApiName').removeClass('redBorder');
+    } else {
+      $('#addApiName').removeClass('redBorder');
+      $('#addApiUrl').removeClass('redBorder');
+      var required = 'false';
+      if (checkbox.checked) {
+        required = 'true';
+      }
+      $('#addApiName').val('');
+      $('#addApiUrl').val('');
+      var apiRef = apiAppRef.child('savedApis');
+      apiRef.push({
+        name: apiName,
+        url: apiUrl,
+        required: required,
+        count200: 0,
+        count300: 0,
+        count400: 0,
+        count500: 0,
+      });
+      //Close modal when clicking cancel
+      $('#cancel').click();
+    }
   });
 
   //Get id of URL to pulseCheck
@@ -232,6 +245,7 @@ function ajaxRequest (currentLine, pulseCheckUrl, dataType){$.ajax({
       $(currentLine).addClass('teapot');
       setTimeout(function() {
         $(currentLine).removeClass('teapot');
+        alert('I\'m a little teapot!');
       }, 2500);
     } else if (apiStatus >= 200 && apiStatus <= 299) {
       $(currentLine).addClass('green');
@@ -269,6 +283,8 @@ function ajaxRequest (currentLine, pulseCheckUrl, dataType){$.ajax({
           return statusCount+1;
         });
       }, 500);
+    } else {
+      alert('Hmm, that didn\'t work out right. Check the developer console for more information.');
     }
   }
   });

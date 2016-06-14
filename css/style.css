@@ -28,8 +28,11 @@
 }
 
 #container {
-	width: 600px;
-	margin: 1.5% auto 1% auto;
+  position: absolute;
+  width: 600px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #footer {
@@ -240,6 +243,10 @@ li:nth-child(even) {
 
 .clear {
   clear: both;
+}
+
+.redBorder {
+  border: 3px solid #c13232;
 }
 
 input {
