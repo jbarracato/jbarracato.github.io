@@ -1,5 +1,8 @@
+// *** DEV TO DO: change baseUrl to be the URL of your Firebase DB ***
+// *** That will update all the functions in this app to use your DB ***
+var baseUrl = 'https://api-pulse-check.firebaseio.com/'
 // connect to your Firebase application using your reference URL
-var apiAppRef = new Firebase('https://api-pulse-check.firebaseio.com/');
+var apiAppRef = new Firebase(baseUrl);
 //load the dependencies for drawing the pie chart from Google
 google.charts.load('current', {'packages':['corechart']});
 
@@ -69,7 +72,7 @@ $(document).ready(function(){
 //Need to keep track of current line so it can flash the correct color
 function pulseCheck(id, currentLine) {
   // find message whose objectId is equal to the id we're searching with
-  var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + '/url');
+  var urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/url');
   urlRef.on('value', function(snapshot) {
     var pulseCheckUrl = snapshot.val();
     ajaxRequest(currentLine, pulseCheckUrl);
@@ -78,7 +81,7 @@ function pulseCheck(id, currentLine) {
 
 //Delete URL from Firebase
 function deleteUrl(id) {
-  var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id);
+  var urlRef = new Firebase(baseUrl + '/savedApis/' + id);
   urlRef.remove();
   $('li').attr('data-id',id).remove();
   getApiList();
@@ -87,13 +90,13 @@ function deleteUrl(id) {
 //Update URL in Firebase
 function editUrl(id) {
   var originalUrl;
-  var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + '/url');
+  var urlRef = new Firebase(baseUrl + 'savedApis/' + id + '/url');
   urlRef.on('value', function(snapshot) {
     originalUrl = snapshot.val();
   });
   var editUrlPrompt = prompt ('Edit your URL:', originalUrl);
   var editedUrl = {url: editUrlPrompt};
-  var newUrlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id);
+  var newUrlRef = new Firebase(baseUrl + '/savedApis/' + id);
   newUrlRef.update(editedUrl);
 }
 
@@ -105,19 +108,19 @@ function getHistory(id) {
   var chartCount400;
   var chartCount500;
   var urlRef;
-  urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + '/count200');
+  urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/count200');
   urlRef.on('value', function(snapshot) {
     chartCount200 = snapshot.val();
   });
-  urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + '/count300');
+  urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/count300');
   urlRef.on('value', function(snapshot) {
     chartCount300 = snapshot.val();
   });
-  urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + '/count400');
+  urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/count400');
   urlRef.on('value', function(snapshot) {
     chartCount400 = snapshot.val();
   });
-  urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + '/count500');
+  urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/count500');
   urlRef.on('value', function(snapshot) {
     chartCount500 = snapshot.val();
   });
@@ -191,7 +194,7 @@ var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
     } else if (apiStatus >= 200 && apiStatus <= 299) {
       $(currentLine).addClass('green');
       countType = '/count200';
-      urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
+      urlRef = new Firebase(baseUrl + '/savedApis/' + id + countType);
       setTimeout(function() {
         urlRef.transaction(function(statusCount) {
           return statusCount+1;
@@ -200,7 +203,7 @@ var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
     } else if (apiStatus >= 300 && apiStatus <= 399) {
       $(currentLine).addClass('yellow');
       countType = '/count300';
-      urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
+      urlRef = new Firebase(baseUrl + '/savedApis/' + id + countType);
       setTimeout(function() {
         urlRef.transaction(function(statusCount) {
           return statusCount+1;
@@ -209,7 +212,7 @@ var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
     } else if (apiStatus >= 400 && apiStatus < 499) {
       $(currentLine).addClass('orange');
       countType = '/count400';
-      urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
+      urlRef = new Firebase(baseUrl + '/savedApis/' + id + countType);
       setTimeout(function() {
         urlRef.transaction(function(statusCount) {
           return statusCount+1;
@@ -218,7 +221,7 @@ var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
     } else if (apiStatus >= 500 && apiStatus < 599) {
       $(currentLine).addClass('red');
       countType = '/count500';
-      urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + countType);
+      urlRef = new Firebase(baseUrl + '/savedApis/' + id + countType);
       setTimeout(function() {
         urlRef.transaction(function(statusCount) {
           return statusCount+1;
