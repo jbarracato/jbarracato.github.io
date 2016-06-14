@@ -86,7 +86,7 @@ $(document).ready(function(){
 
   // When the user clicks on the A, go to instagram to authenticate
   $('#getToken').on('click', function() {
-    window.location = 'https://instagram.com/oauth/authorize/?client_id=bc3878c438c94b1190be2f66cfde8b83&redirect_uri=http://localhost:3000&response_type=token&scope=public_content';
+    window.location = 'https://instagram.com/oauth/authorize/?client_id=bc3878c438c94b1190be2f66cfde8b83&redirect_uri=http://jbarracato.github.io&response_type=token&scope=public_content';
   });
 
   //Wait for the apiList to populate before expanding it
@@ -115,7 +115,7 @@ function pulseCheck(id, currentLine) {
     if (tokenRequired == 'true') {
       pulseCheckUrl = pulseCheckUrl + '&access_token=' + token;
       dataType = 'jsonp'
-    } 
+    }
     ajaxRequest(currentLine, pulseCheckUrl, dataType);
   });
 }
