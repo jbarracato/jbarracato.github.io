@@ -7,7 +7,7 @@ google.charts.load('current', {'packages':['corechart']});
 $(document).ready(function(){
 
   //Initial population of URL list
-    getApiList();
+  getApiList();
 
 // *** PRIMARY EVENT HANDLERS ***
 
@@ -31,7 +31,7 @@ $(document).ready(function(){
   });
 
   //Get id of URL to pulseCheck
-  //NOTE: Need to keep track of current line so it can flash the correct color
+  //Need to keep track of current line so it can flash the correct color
   $('#apiList').on('click', '.fa-heartbeat', function () {
     var id = ($(this).parent().data('id'));
     var currentLine = $(this).parent();
@@ -56,16 +56,17 @@ $(document).ready(function(){
     getHistory(id);
   });
 
+  //Wait for the apiList to populate before expanding it
   setTimeout(function() {
     $('#apiList').addClass('expand');
-  }, 1000);
+  }, 2000);
 
 //close document.ready function on next line
 });
 
 // *** ACCESS & MANIPULATE DATA IN FIREBASE
 //pulseCheck URL
-//NOTE: Need to keep track of current line so it can flash the correct color
+//Need to keep track of current line so it can flash the correct color
 function pulseCheck(id, currentLine) {
   // find message whose objectId is equal to the id we're searching with
   var urlRef = new Firebase('https://api-pulse-check.firebaseio.com/savedApis/' + id + '/url');
@@ -155,7 +156,7 @@ function getHistory(id) {
   });
 }
 
-//
+//Populate the DOM with a li for each entry in Firebase
 function getApiList() {
   apiAppRef.child('savedApis').on('value', function (results) {
     var $apiList = $('#apiList');
@@ -182,7 +183,6 @@ var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
     var urlRef;
     var apiStatus = xhr.status;
     var id = currentLine.data('id');
-
     if (apiStatus == 418) {
       $(currentLine).addClass('teapot');
       setTimeout(function() {
