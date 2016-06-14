@@ -1,6 +1,6 @@
 // *** DEV TO DO: change baseUrl to be the URL of your Firebase DB ***
 // *** That will update all the functions in this app to use your DB ***
-var baseUrl = 'https://api-pulse-check.firebaseio.com/'
+var baseUrl = 'https://api-pulse-check.firebaseio.com/';
 // connect to your Firebase application using your reference URL
 var apiAppRef = new Firebase(baseUrl);
 //load the dependencies for drawing the pie chart from Google
@@ -97,6 +97,7 @@ $(document).ready(function(){
     $modal.addClass('none');
   });
 
+// *** DEV TO DO: change window.location to be the URL for authentication service ***
   // When the user clicks on the A, go to instagram to authenticate
   $('#getToken').on('click', function() {
     window.location = 'https://instagram.com/oauth/authorize/?client_id=bc3878c438c94b1190be2f66cfde8b83&redirect_uri=http://jbarracato.github.io&response_type=token&scope=public_content';
@@ -122,12 +123,12 @@ function pulseCheck(id, currentLine) {
     tokenRequired = snapshot.val();
   });
   // find message whose objectId is equal to the id we're searching with
-  var urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/url');
+  urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/url');
   urlRef.on('value', function(snapshot) {
     var pulseCheckUrl = snapshot.val();
     if (tokenRequired == 'true') {
       pulseCheckUrl = pulseCheckUrl + '&access_token=' + token;
-      dataType = 'jsonp'
+      dataType = 'jsonp';
     }
     ajaxRequest(currentLine, pulseCheckUrl, dataType);
   });
@@ -193,7 +194,7 @@ function getHistory(id) {
       title: 'Historical Performance',
       backgroundColor: '#fefefe',
       height: 500,
-      legend: {position: 'bottom', textStyle: {fontSize: 20}},
+      legend: {position: 'bottom', textStyle: {fontSize: 12}},
       titleTextStyle: {fontSize: 20},
       pieSliceTextStyle: {color: 'black', fontSize: 20},
       slices: {0: {color: '#329832'}, 1: {color: '#cccc3c'}, 2: {color: '#de8732'}, 3: {color: '#c13232'}}
@@ -288,4 +289,4 @@ function ajaxRequest (currentLine, pulseCheckUrl, dataType){$.ajax({
     }
   }
   });
-};
+}
