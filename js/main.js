@@ -5,17 +5,28 @@ var baseUrl = 'https://api-pulse-check.firebaseio.com/'
 var apiAppRef = new Firebase(baseUrl);
 //load the dependencies for drawing the pie chart from Google
 google.charts.load('current', {'packages':['corechart']});
+//check for access token
+var token = window.location.hash.slice(14);
 
 //Wait for the page to load before populating list/enabling event handlers
 $(document).ready(function(){
 
+  //If you have a token, hide the authenticate button
+  if (token.length > 0) {
+    $('#getToken').hide();
+  }
+
   //Initial population of URL list
   getApiList();
 
-// *** PRIMARY EVENT HANDLERS ***
+// *** EVENT HANDLERS ***
 
   //Add new URL to Firebase
   $('#submit').on('click', function (event) {
+    var required = 'false';
+    if (checkbox.checked) {
+      required = 'true';
+    }
     var apiName = $('#addApiName').val();
     var apiUrl = $('#addApiUrl').val();
     $('#addApiName').val('');
@@ -24,6 +35,7 @@ $(document).ready(function(){
     apiRef.push({
       name: apiName,
       url: apiUrl,
+      required: required,
       count200: 0,
       count300: 0,
       count400: 0,
@@ -59,6 +71,24 @@ $(document).ready(function(){
     getHistory(id);
   });
 
+  // SHOW & HIDE 'ADD NEW URL' MODAL
+  // When the user clicks on the +, open the add modal
+  var $modal = $('#myModal');
+  $('#add').on('click', function () {
+    $modal.removeClass('none');
+    $modal.addClass('block');
+  });
+  // When the user clicks on cancel, close the modal
+  $('#cancel').on('click', function () {
+    $modal.removeClass('block');
+    $modal.addClass('none');
+  });
+
+  // When the user clicks on the A, go to instagram to authenticate
+  $('#getToken').on('click', function() {
+    window.location = 'https://instagram.com/oauth/authorize/?client_id=bc3878c438c94b1190be2f66cfde8b83&redirect_uri=http://localhost:3000&response_type=token&scope=public_content';
+  });
+
   //Wait for the apiList to populate before expanding it
   setTimeout(function() {
     $('#apiList').addClass('expand');
@@ -71,11 +101,22 @@ $(document).ready(function(){
 //pulseCheck URL
 //Need to keep track of current line so it can flash the correct color
 function pulseCheck(id, currentLine) {
+  //check if token is required
+  var urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/required');
+  var tokenRequired;
+  var dataType = 'json';
+  urlRef.on('value', function(snapshot) {
+    tokenRequired = snapshot.val();
+  });
   // find message whose objectId is equal to the id we're searching with
   var urlRef = new Firebase(baseUrl + '/savedApis/' + id + '/url');
   urlRef.on('value', function(snapshot) {
     var pulseCheckUrl = snapshot.val();
-    ajaxRequest(currentLine, pulseCheckUrl);
+    if (tokenRequired == 'true') {
+      pulseCheckUrl = pulseCheckUrl + '&access_token=' + token;
+      dataType = 'jsonp'
+    } 
+    ajaxRequest(currentLine, pulseCheckUrl, dataType);
   });
 }
 
@@ -179,8 +220,9 @@ function getApiList() {
 }
 
 //ajax request for pulseCheck
-var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
+function ajaxRequest (currentLine, pulseCheckUrl, dataType){$.ajax({
   url: pulseCheckUrl,
+  dataType: dataType,
   complete: function(xhr, textStatus) {
     var countType;
     var urlRef;
@@ -231,18 +273,3 @@ var ajaxRequest = function (currentLine, pulseCheckUrl){$.ajax({
   }
   });
 };
-
-// *** SECONDARY EVENT HANDLERS ***
-
-// SHOW & HIDE 'ADD NEW URL' MODAL
-// When the user clicks on the button, open the modal
-var $modal = $('#myModal');
-$('#add').on('click', function () {
-  $modal.removeClass('none');
-  $modal.addClass('block');
-});
-// When the user clicks on <span> (x), close the modal
-$('#cancel').on('click', function () {
-  $modal.removeClass('block');
-  $modal.addClass('none');
-});

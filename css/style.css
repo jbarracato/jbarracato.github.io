@@ -1,11 +1,22 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
+#add, #getToken {
+  color: #EEEEEE;
+  cursor: pointer;
+}
+
 #add {
   font-size: 25px;
   text-align: right;
   margin-right: 10px;
-  color: #EEEEEE;
+}
+
+#getToken {
+  font-size: 20px;
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 #apiList {
@@ -54,6 +65,21 @@ body {
 /******************************************
 /* COMMON STYLES
 /*******************************************/
+#cancel, #getToken {
+  float: left;
+}
+
+#submit, #add {
+  float: right;
+}
+
+.modal-content, #piechart {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    width: 40%; /* Could be more or less, depending on screen size */
+    height: 200px;
+}
+
 .run:hover, .edit:hover, .delete:hover, .history:hover, #cancel:hover, #submit {
   cursor: pointer;
   background: #4C4C4C;
@@ -180,7 +206,25 @@ li:nth-child(even) {
 
 #cancel {
   background: #4c4c4c;
+}
+
+#checkboxContainer, #labelContainer {
+  display: block;
   float: left;
+}
+
+#checkbox {
+  width: 20px;
+}
+
+#checkboxContainer {
+  margin-left: 5%;
+}
+
+#labelContainer {
+  font-size: 20px;
+  margin-top: 8px;
+  margin-left: 3%;
 }
 
 #modalHeader {
@@ -192,14 +236,10 @@ li:nth-child(even) {
 
 #submit {
   background: #329832;
-  float: right;
 }
 
-.modal-content, #piechart {
-    background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
-    width: 40%; /* Could be more or less, depending on screen size */
-    height: 200px;
+.clear {
+  clear: both;
 }
 
 input {

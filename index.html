@@ -20,7 +20,7 @@
     <div id='container'>
       <div id='header'><h1>API Pulse Check</h1></div>
       <div id='apiList'></div>
-      <div id='footer'><p id='add'>+</p></div>
+      <div id='footer'><div id='getToken'>A</div><div id='add'>+</div></div>
 
 
     </div> <!--container div-->
@@ -34,6 +34,15 @@
           <input name='newApiName' type='text' id='addApiName' placeholder='Name' />
           <input name='newApiUrl' type='text' id='addApiUrl' placeholder='URL'/>
           <br />
+          <div>
+            <div id='checkboxContainer'>
+              <input type='checkbox' name='oauthcheck' value='required' id='checkbox' />
+            </div>
+            <div id ='labelContainer'>
+              <label for='checkbox' id='label'>OAuth Required?</label>
+            </div>
+          </div>
+          <div class='clear'></div>
           <div id='cancel'>CANCEL</div>
           <div id='submit'>SUBMIT</div>
         </div>
