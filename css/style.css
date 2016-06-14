@@ -246,7 +246,7 @@ li:nth-child(even) {
 }
 
 .redBorder {
-  border: 3px solid #c13232;
+  border: 1px solid #c13232;
 }
 
 input {
